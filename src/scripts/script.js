@@ -1,6 +1,7 @@
 import '../styles/styles.scss'
 import '../styles/styles-buttons.scss'
 import { init } from './all-buttons.js'
+import { runOnKeys } from './runOnKeys.js'
 
 
 let body = document.querySelector('body')
@@ -17,7 +18,7 @@ description.setAttribute('id', 'description')
 let language = document.createElement('p')
 language.setAttribute('id', 'language')
 
-
+let lang = true
 
 body.appendChild(wrapper)
 wrapper.appendChild(title)
@@ -64,5 +65,8 @@ document.querySelectorAll('#keyboard .key').forEach(function (element) {
   }
 })
 
-
+runOnKeys(() => {
+  lang = !lang
+  init(lang)
+}, 'ControlLeft', 'AltLeft')
 
