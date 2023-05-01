@@ -2,7 +2,7 @@ import '../styles/styles.scss'
 import '../styles/styles-buttons.scss'
 import { init } from './all-buttons.js'
 import { runOnKeys } from './runOnKeys.js'
-import { runUpCase } from './isUpperCase'
+
 
 let body = document.querySelector('body')
 let wrapper = document.createElement('div')
