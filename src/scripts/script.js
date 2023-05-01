@@ -18,7 +18,7 @@ description.setAttribute('id', 'description')
 let language = document.createElement('p')
 language.setAttribute('id', 'language')
 
-let lang = true
+let lang = false
 
 body.appendChild(wrapper)
 wrapper.appendChild(title)
@@ -29,7 +29,7 @@ wrapper.appendChild(language)
 
 title.textContent = "RSS Виртуальная клавиатура"
 description.textContent = "Клавиатура создана в операционной системе Windows"
-language.textContent = "Для переключения языка комбинация: левыe ctrl + alt"
+language.textContent = "Для переключения языка комбинация: левыe shift + alt"
 
 init()
 
@@ -37,10 +37,11 @@ document.onkeydown = function (event) {
   document.querySelector('#keyboard .key[data="' + event.code + '"]').classList.add('active')
   if (event.code === 'Backspace') {
     textArea.textContent = textArea.textContent.slice(0, textArea.textContent.length - 1)
+  } else if (event.code === 'Tab' || event.code === 'CapsLock' || event.code === 'Enter' || event.code === 'ShiftLeft' || event.code === 'ShiftRight' || event.code === 'ControlLeft' || event.code === 'ControlRight' || event.code === 'MetaLeft' || event.code === 'AltRight' || event.code === 'ArrowUp' || event.code === 'ArrowLeft' || event.code === 'ArrowDown' || event.code === 'ArrowRight') {
+    textArea.textContent === textArea.textContent
   } else {
     textArea.textContent += event.key
   }
-  console.log(event);
 }
 
 document.onkeyup = function (event) {
@@ -52,9 +53,10 @@ document.querySelectorAll('#keyboard .key').forEach(function (element) {
     event.target.classList.add('active')
     if (event.target.getAttribute('value') === 'Backspace') {
       textArea.textContent = textArea.textContent.slice(0, textArea.textContent.length - 1)
+    } else if (event.target.getAttribute('value') === 'Tab' || event.target.getAttribute('value') === 'CapsLock' || event.target.getAttribute('value') === 'Enter' || event.target.getAttribute('value') === 'shift' || event.target.getAttribute('value') === 'Ctrl' || event.target.getAttribute('value') === 'Win' || event.target.getAttribute('value') === 'Alt' || event.target.getAttribute('value') === '↑' || event.target.getAttribute('value') === '←' || event.target.getAttribute('value') === '↓' || event.target.getAttribute('value') === '→') {
+      textArea.textContent === textArea.textContent
     } else {
       textArea.textContent += event.target.getAttribute('value')
-      console.log(event.target.getAttribute('value'));
     }
   }
 })
@@ -68,5 +70,5 @@ document.querySelectorAll('#keyboard .key').forEach(function (element) {
 runOnKeys(() => {
   lang = !lang
   init(lang)
-}, 'ControlLeft', 'AltLeft')
+}, 'ShiftLeft', 'AltLeft')
 

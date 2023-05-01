@@ -460,7 +460,7 @@ export function init(isRu) {
     } else if (i === 58) {
       out += '<div class = "key space" value="' + keyboard[i].name + '" data = "' + keyboard[i].code + '" >' + keyboard[i][isRu ? 'ruName' : "name"] + '</div>'
     } else {
-      out += '<div class = "key" shift="' + keyboard[i].name + '" value="' + keyboard[i].name + '" data = "' + keyboard[i].code + '" >' + keyboard[i][isRu ? 'ruName' : "name"] + '</div>'
+      out += '<div class = "key" value="' + keyboard[i].name + '" data = "' + keyboard[i].code + '" >' + keyboard[i][isRu ? 'ruName' : "name"] + '</div>'
     }
   }
   document.querySelector('#keyboard').innerHTML = out;
