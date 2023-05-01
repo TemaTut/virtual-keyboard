@@ -2,7 +2,7 @@ import '../styles/styles.scss'
 import '../styles/styles-buttons.scss'
 import { init } from './all-buttons.js'
 import { runOnKeys } from './runOnKeys.js'
-
+import { runUpCase } from './isUpperCase'
 
 let body = document.querySelector('body')
 let wrapper = document.createElement('div')
@@ -19,6 +19,8 @@ let language = document.createElement('p')
 language.setAttribute('id', 'language')
 
 let lang = false
+let shift = false
+
 
 body.appendChild(wrapper)
 wrapper.appendChild(title)
@@ -35,13 +37,26 @@ init()
 
 document.onkeydown = function (event) {
   document.querySelector('#keyboard .key[data="' + event.code + '"]').classList.add('active')
-  if (event.code === 'Backspace') {
-    textArea.textContent = textArea.textContent.slice(0, textArea.textContent.length - 1)
-  } else if (event.code === 'Tab' || event.code === 'CapsLock' || event.code === 'Enter' || event.code === 'ShiftLeft' || event.code === 'ShiftRight' || event.code === 'ControlLeft' || event.code === 'ControlRight' || event.code === 'MetaLeft' || event.code === 'AltRight' || event.code === 'ArrowUp' || event.code === 'ArrowLeft' || event.code === 'ArrowDown' || event.code === 'ArrowRight') {
-    textArea.textContent === textArea.textContent
-  } else {
-    textArea.textContent += event.key
-  }
+  if (!shift)
+    if (event.code === 'Backspace') {
+      textArea.textContent = textArea.textContent.slice(0, textArea.textContent.length - 1)
+    } else if (event.code === 'Tab' || event.code === 'Enter' || event.code === 'ShiftLeft' || event.code === 'ShiftRight' || event.code === 'ControlLeft' || event.code === 'ControlRight' || event.code === 'MetaLeft' || event.code === 'AltRight' || event.code === 'ArrowUp' || event.code === 'ArrowLeft' || event.code === 'ArrowDown' || event.code === 'ArrowRight') {
+      textArea.textContent === textArea.textContent
+    } else if (event.code === 'CapsLock') {
+      textArea.textContent === textArea.textContent
+      shift = !shift
+      console.log(shift);
+    } else {
+      textArea.textContent += event.key
+    }
+  if (shift)
+    if (event.code === 'Backspace') {
+      textArea.textContent = textArea.textContent.slice(0, textArea.textContent.length - 1)
+    } else if (event.code === 'Tab' || event.code === 'CapsLock' || event.code === 'Enter' || event.code === 'ShiftLeft' || event.code === 'ShiftRight' || event.code === 'ControlLeft' || event.code === 'ControlRight' || event.code === 'MetaLeft' || event.code === 'AltRight' || event.code === 'ArrowUp' || event.code === 'ArrowLeft' || event.code === 'ArrowDown' || event.code === 'ArrowRight') {
+      textArea.textContent === textArea.textContent
+    } else {
+      textArea.textContent += event.key.toUpperCase()
+    }
 }
 
 document.onkeyup = function (event) {
@@ -71,4 +86,9 @@ runOnKeys(() => {
   lang = !lang
   init(lang)
 }, 'ShiftLeft', 'AltLeft')
+
+runUpCase(() => {
+  shift = !shift
+  init(shift)
+}, 'CapsLock')
 
