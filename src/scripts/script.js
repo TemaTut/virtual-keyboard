@@ -45,15 +45,17 @@ document.onkeydown = function (event) {
     } else if (event.code === 'CapsLock') {
       textArea.textContent === textArea.textContent
       shift = !shift
-      console.log(shift);
     } else {
       textArea.textContent += event.key
     }
   if (shift)
     if (event.code === 'Backspace') {
       textArea.textContent = textArea.textContent.slice(0, textArea.textContent.length - 1)
-    } else if (event.code === 'Tab' || event.code === 'CapsLock' || event.code === 'Enter' || event.code === 'ShiftLeft' || event.code === 'ShiftRight' || event.code === 'ControlLeft' || event.code === 'ControlRight' || event.code === 'MetaLeft' || event.code === 'AltRight' || event.code === 'ArrowUp' || event.code === 'ArrowLeft' || event.code === 'ArrowDown' || event.code === 'ArrowRight') {
+    } else if (event.code === 'Tab' || event.code === 'Enter' || event.code === 'ShiftLeft' || event.code === 'ShiftRight' || event.code === 'ControlLeft' || event.code === 'ControlRight' || event.code === 'MetaLeft' || event.code === 'AltRight' || event.code === 'ArrowUp' || event.code === 'ArrowLeft' || event.code === 'ArrowDown' || event.code === 'ArrowRight') {
       textArea.textContent === textArea.textContent
+    } else if (event.code === 'CapsLock') {
+      textArea.textContent === textArea.textContent
+      shift = !shift
     } else {
       textArea.textContent += event.key.toUpperCase()
     }
@@ -65,13 +67,31 @@ document.onkeyup = function (event) {
 
 document.querySelectorAll('#keyboard .key').forEach(function (element) {
   element.onmousedown = function (event) {
-    event.target.classList.add('active')
+    if (!shift)
+      event.target.classList.add('active')
     if (event.target.getAttribute('value') === 'Backspace') {
       textArea.textContent = textArea.textContent.slice(0, textArea.textContent.length - 1)
-    } else if (event.target.getAttribute('value') === 'Tab' || event.target.getAttribute('value') === 'CapsLock' || event.target.getAttribute('value') === 'Enter' || event.target.getAttribute('value') === 'shift' || event.target.getAttribute('value') === 'Ctrl' || event.target.getAttribute('value') === 'Win' || event.target.getAttribute('value') === 'Alt' || event.target.getAttribute('value') === '↑' || event.target.getAttribute('value') === '←' || event.target.getAttribute('value') === '↓' || event.target.getAttribute('value') === '→') {
+    } else if (event.target.getAttribute('value') === 'Tab' || event.target.getAttribute('value') === 'Enter' || event.target.getAttribute('value') === 'shift' || event.target.getAttribute('value') === 'Ctrl' || event.target.getAttribute('value') === 'Win' || event.target.getAttribute('value') === 'Alt' || event.target.getAttribute('value') === '↑' || event.target.getAttribute('value') === '←' || event.target.getAttribute('value') === '↓' || event.target.getAttribute('value') === '→') {
       textArea.textContent === textArea.textContent
+    } else if (event.target.getAttribute('value') === 'CapsLock') {
+      textArea.textContent === textArea.textContent
+      shift = !shift
+      console.log(event.target.getAttribute('value'));
     } else {
       textArea.textContent += event.target.getAttribute('value')
+      console.log(event.target.getAttribute('value'));
+    }
+    if (shift)
+      event.target.classList.add('active')
+    if (event.target.getAttribute('value') === 'Backspace') {
+      textArea.textContent = textArea.textContent.slice(0, textArea.textContent.length - 1)
+    } else if (event.target.getAttribute('value') === 'Tab' || event.target.getAttribute('value') === 'Enter' || event.target.getAttribute('value') === 'shift' || event.target.getAttribute('value') === 'Ctrl' || event.target.getAttribute('value') === 'Win' || event.target.getAttribute('value') === 'Alt' || event.target.getAttribute('value') === '↑' || event.target.getAttribute('value') === '←' || event.target.getAttribute('value') === '↓' || event.target.getAttribute('value') === '→') {
+      textArea.textContent === textArea.textContent
+    } else if (event.target.getAttribute('value') === 'CapsLock') {
+      textArea.textContent === textArea.textContent
+      shift = !shift
+    } else {
+      // textArea.textContent += event.target.getAttribute('value')
     }
   }
 })
@@ -79,6 +99,7 @@ document.querySelectorAll('#keyboard .key').forEach(function (element) {
 document.querySelectorAll('#keyboard .key').forEach(function (element) {
   element.onmouseup = function () {
     this.classList.remove('active')
+    shift = !shift
   }
 })
 
@@ -87,8 +108,8 @@ runOnKeys(() => {
   init(lang)
 }, 'ShiftLeft', 'AltLeft')
 
-runUpCase(() => {
-  shift = !shift
-  init(shift)
-}, 'CapsLock')
+// runUpCase(() => {
+//   shift = !shift
+//   init(shift)
+// }, 'CapsLock')
 
